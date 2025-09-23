@@ -1,0 +1,138 @@
+body {
+  background: #f5f6f7;
+}
+
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.wrap {
+  width: 1280px;
+  max-width: 1280px;
+  position: relative;
+  margin: 0 auto;
+}
+
+.clear-float::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.empty-data {
+  text-align: center;
+  height: 50px;
+  line-height: 50px;
+}
+
+.cool-down {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  border-radius: 3px;
+  background-color: #2b2d2ccc;
+  overflow: hidden;
+  &::after {
+    content: '';
+    position: absolute;
+    width: 11px;
+    height: 11px;
+    background-color: #b6bbb8;
+    transform: rotate(90deg);
+    transform-origin: bottom right;
+  }
+  &::before {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 15px;
+    right: 11px;
+    top: -4px;
+    background-color: #b6bbb8;
+    transform: rotate(135deg);
+    transform-origin: bottom right;
+  }
+}
+
+.main-container {
+  background: #fff;
+}
+
+.cost {
+  width: 22px;
+  height: 22px;
+  border-radius: 3px;
+  background-color: #00a6de;
+}
+
+.page-loading {
+  position: absolute;
+  background: #fff;
+  left: 0;
+  right: 0;
+  z-index: 999;
+}
+
+.loading-text {
+  color: #808695;
+}
+
+.spin-icon-load {
+  animation: spin 1s linear infinite;
+}
+
+.win {
+  color: #19be6b !important;
+}
+
+.lose {
+  color: #ed4014 !important;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.page-container {
+  text-align: right;
+  padding: 16px 0 10px 0;
+}
+
+.table-load {
+  .load-text {
+    width: 80px;
+  }
+}
+
+/*页面加载进度条*/
+#nprogress .bar {
+  background: #0c9dfc;
+  height: 1px;
+}
+
+/*滚动条样式*/
+::-webkit-scrollbar {
+  height: 3px;
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: #b9b9b9;
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #fff;
+}
