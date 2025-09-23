@@ -1,5 +1,3 @@
-# 构建 Vue + Vite 应用并将其部署到 GitHub Pages
-#
 name: Deploy Vue site to Pages
 
 on:
@@ -19,29 +17,34 @@ permissions:
 # 只允许同时进行一次部署，跳过正在运行和最新队列之间的运行队列
 concurrency:
   group: pages
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   # 构建工作
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: 检出代码
         uses: actions/checkout@v4
         with:
           fetch-depth: 0 # 如果未启用 lastUpdated，则不需要
-      - name: Setup Node
+        
+      - name: 设置 Node.js 环境
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
-      - name: Setup Pages
+        
+      - name: 配置 Pages
         uses: actions/configure-pages@v4
-      - name: Install dependencies
+
+      - name: 安装依赖
         run: npm ci
-      - name: Build with Vite
+
+      - name: 构建项目
         run: npm run build
-      - name: Upload artifact
+
+      - name: 上传构建产物
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist
