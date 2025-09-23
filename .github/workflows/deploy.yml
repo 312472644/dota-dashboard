@@ -24,27 +24,27 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: 检出代码
+      - name: 📥 检出代码
         uses: actions/checkout@v4
         with:
           fetch-depth: 0 # 如果未启用 lastUpdated，则不需要
         
-      - name: 设置 Node.js 环境
+      - name: 🛠️ 设置 Node.js 环境
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
         
-      - name: 配置 Pages
+      - name: ⚙️ 配置 Pages
         uses: actions/configure-pages@v4
 
-      - name: 安装依赖
+      - name: 📦 安装依赖
         run: npm ci
 
-      - name: 构建项目
+      - name: 🏗️ 构建项目
         run: npm run build
 
-      - name: 上传构建产物
+      - name: 📤 上传构建产物
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist
@@ -58,6 +58,6 @@ jobs:
     runs-on: ubuntu-latest
     name: Deploy
     steps:
-      - name: Deploy to GitHub Pages
+      - name: 🚀 Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

@@ -3,7 +3,6 @@ import vue from '@vitejs/plugin-vue';
 import * as path from 'path';
 
 export default defineConfig(({ mode }) => {
-  console.log('🚀 ~ mode:', mode);
   return {
     base: mode === 'production' ? '/dota-dashboard' : '/',
     plugins: [vue()],
