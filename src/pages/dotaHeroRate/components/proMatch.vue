@@ -39,13 +39,13 @@ const getHeroStats = async () => {
   loading.value = true;
   const response = await getHeroStatsAPI();
   const dataList = (response.data || []).map(item => {
-    const { hero_id, pro_ban, pro_pick, pro_win } = item;
-    const { name_loc, index_img } = getCacheHeroInfo(hero_id);
+    const { hero_id, pro_ban, pro_pick, pro_win, localized_name, name } = item;
+    const { name_loc, index_img } = getCacheHeroInfo(hero_id) || {};
     return {
       ...item,
       banCount: pro_ban + pro_pick + pro_win,
-      name_loc,
-      index_img
+      name_loc: name_loc || localized_name,
+      index_img: `https://img.dota2.com.cn/dota2static/herostatic/index/${name}.png`
     };
   });
   tableList.value.push(...dataList);
@@ -53,7 +53,7 @@ const getHeroStats = async () => {
 };
 
 const toHeroSummary = row => {
-  router.push({ path: `/dota-data/dota-hero-summary/${row.hero_id}` });
+  router.push({ path: `/dota-data/dota-hero-summary/${row.hero_id || row.id}` });
 };
 
 onMounted(() => {

@@ -9,7 +9,7 @@
       <div class="rank">
         <div v-for="(item, index) in heroList" :key="index" class="rank-item" @click="toHeroDetail(item)">
           <div class="rank-no">{{ index + 1 }}</div>
-          <Image class="avatar" width="60px" height="60px" :src="item.hero_img" lazy></Image>
+          <TableImage class="avatar" :src="item.hero_img" width="60px" height="60px" />
           <div class="hero-name">{{ item.hero_name }}</div>
         </div>
       </div>
@@ -20,6 +20,7 @@
 import { ref, onMounted, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { getHeroTopAPI, getVersionListAPI } from '@/service/common';
+import { TableImage } from '@/components';
 
 const loading = ref(false);
 const router = useRouter();

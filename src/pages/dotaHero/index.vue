@@ -21,7 +21,6 @@ const getHeroList = async () => {
   const { result } = response.data || {};
   if (result?.heroes) {
     result.heroes = result?.heroes.map(item => {
-      console.log('22', item.primary_attr);
       return {
         ...item,
         primaryAttrLogo: heroMap[item.primary_attr]?.primaryAttrLogo

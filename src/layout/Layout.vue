@@ -3,9 +3,7 @@
   <div class="content-wrap">
     <div class="wrap">
       <router-view v-slot="{ Component }">
-        <keep-alive>
-          <component :is="Component" :key="$router.path" />
-        </keep-alive>
+        <component :is="Component" :key="$router.path" />
       </router-view>
     </div>
   </div>

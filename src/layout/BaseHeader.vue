@@ -21,7 +21,7 @@ import BaseLink from './BaseLink.vue';
   min-width: 1280px;
   position: sticky;
   top: 0;
-  z-index: 9999;
+  z-index: 999;
   height: 70px;
   .header-main {
     height: 100%;

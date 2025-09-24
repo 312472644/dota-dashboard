@@ -2,12 +2,12 @@
   <div class="hero-base-container">
     <div class="hero-base-content">
       <div class="avatar">
-        <Image :src="heroInfo.index_img" fit="contain"></Image>
+        <Image :src="heroInfo?.index_img" fit="contain"></Image>
       </div>
       <div class="hero-info">
         <div class="hero-name">
           <Tooltip content="点击查看英雄详情" placement="top">
-            <span class="link" @click="toHeroDetail">{{ heroInfo.name_loc }}</span>
+            <span class="link" @click="toHeroDetail">{{ heroInfo?.name_loc }}</span>
             <Icon type="ios-arrow-forward" size="18" color="#2d8cf0" />
           </Tooltip>
         </div>

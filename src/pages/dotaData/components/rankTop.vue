@@ -6,7 +6,7 @@
     <page-loading :show="loading" />
     <div v-if="!loading">
       <div class="sub-title">Elo等级分排名 k = 32, init = 1000</div>
-      <div class="rank">
+      <div v-if="rankList.length > 0" class="rank">
         <div v-for="(item, index) in rankList" :key="index" class="rank-item" @click="toPlayerDetail(item)">
           <div class="rank-no">{{ item.rank }}</div>
           <Image class="avatar" width="60px" height="60px" :src="item?.steam_id_info?.avatar_url">
@@ -17,6 +17,7 @@
           <div class="name">{{ item.name }}</div>
         </div>
       </div>
+      <Empty v-else />
     </div>
   </Card>
 </template>
@@ -25,6 +26,7 @@ import { onMounted, reactive, ref } from 'vue';
 import { Message } from 'view-ui-plus';
 import { getRankListAPI } from '@/service/proxy-request';
 import { useRouter } from 'vue-router';
+import { Empty } from '@/components';
 
 const loading = ref(false);
 const router = useRouter();
@@ -32,12 +34,15 @@ const rankList = reactive([]);
 
 const getRankList = async () => {
   loading.value = true;
-  const response = await getRankListAPI();
-  const dataList = response.data?.result || [];
-  rankList.push(...dataList.slice(0, 10));
-  setTimeout(() => {
-    loading.value = false;
-  }, 1000);
+  try {
+    const response = await getRankListAPI();
+    const dataList = response.data?.result || [];
+    rankList.push(...dataList.slice(0, 10));
+  } finally {
+    setTimeout(() => {
+      loading.value = false;
+    }, 1000);
+  }
 };
 
 const toPlayerDetail = data => {

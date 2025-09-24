@@ -41,6 +41,7 @@ const columns = [
   { title: '序号', type: 'index', width: '60px' },
   { title: '英雄名称', slot: 'name' },
   { title: '胜率', key: 'winRate', sortable: true, sortType: 'desc' },
+  { title: '天梯段位', key: 'score_rank', sortable: true },
   { title: '英雄选择率', key: 'hero_picks_rate', sortable: true },
   { title: '人气', key: 'popularity', sortable: true }
 ];

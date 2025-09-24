@@ -55,7 +55,7 @@ const clickEvent = item => {
   if (anchorDom) {
     anchorDom.scrollIntoView({
       behavior: 'smooth',
-      block: 'center'
+      block: 'start'
     });
     activeAnchor.value = item.name;
     anchorTrigger = true;

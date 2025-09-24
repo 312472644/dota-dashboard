@@ -12,7 +12,7 @@ const service = axios.create({
       return responseData;
     }
   ],
-  timeout: 15 * 1000
+  timeout: 30 * 1000
 });
 
 service.interceptors.request.use(config => {
