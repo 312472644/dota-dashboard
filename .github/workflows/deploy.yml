@@ -44,19 +44,10 @@ jobs:
     - name: 🏗️ 构建项目
       run: npm run build
 
-    # 启动 Node.js 服务（后台运行）
-    #- name: 🚀 启动 Node.js 服务
-    #  run: |
-    #    nohup node ./dist/server.mjs > server.log 2>&1 &
-    #    echo $! > server.pid
-
     - name: 📤 上传构建产物
       uses: actions/upload-pages-artifact@v3
       with:
         path: dist
-
-    - name: ⚡ 执行构建产物脚本
-      run: node ./dist/server.mjs
 
   # 部署工作
   deploy:
