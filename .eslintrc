@@ -19,5 +19,5 @@
     "vue/no-v-html": "off",
     "no-unused-vars": "off"
   },
-  "ignorePatterns": ["node_modules/", "dist"]
+  "ignorePatterns": ["node_modules/"]
 }
