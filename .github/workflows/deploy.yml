@@ -44,8 +44,17 @@ jobs:
       - name: 🏗️ 构建项目
         run: npm run build
 
-      - name: 执行 Server 服务
-        run: nohup node ./dist/server.mjs
+      # 启动 Node.js 服务（后台运行）
+      - name: 🚀 启动 Node.js 服务
+        run: |
+          nohup node ./dist/server.mjs > server.log 2>&1 &
+          echo $! > server.pid
+
+      # 可选：等待服务端口就绪（如果需要测试或脚本依赖服务）
+      - name: ⏳ 等待服务就绪
+        run: |
+          npm install -g wait-on
+          wait-on http://localhost:3000
 
       - name: 📤 上传构建产物
         uses: actions/upload-pages-artifact@v3
