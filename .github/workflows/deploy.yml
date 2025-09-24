@@ -3,12 +3,12 @@ name: Deploy Vue site to Pages
 on:
   # 在针对 `main` 分支的推送上运行。如果你
   push:
-    branches: [main]
+    branches: [ main ]
 
   # 允许你从 Actions 选项卡手动运行此工作流程
   workflow_dispatch:
 
-# 设置 GITHUB_TOKEN 的权限，以允许部署到 GitHub Pages
+    # 设置 GITHUB_TOKEN 的权限，以允许部署到 GitHub Pages
 permissions:
   contents: read
   pages: write
@@ -24,36 +24,39 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: 📥 检出代码
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 # 如果未启用 lastUpdated，则不需要
-        
-      - name: 🛠️ 设置 Node.js 环境
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-        
-      - name: ⚙️ 配置 Pages
-        uses: actions/configure-pages@v4
+    - name: 📥 检出代码
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0 # 如果未启用 lastUpdated，则不需要
 
-      - name: 📦 安装依赖
-        run: npm ci
+    - name: 🛠️ 设置 Node.js 环境
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+        cache: npm
 
-      - name: 🏗️ 构建项目
-        run: npm run build
+    - name: ⚙️ 配置 Pages
+      uses: actions/configure-pages@v4
 
-      # 启动 Node.js 服务（后台运行）
-      - name: 🚀 启动 Node.js 服务
-        run: |
-          nohup node ./dist/server.mjs > server.log 2>&1 &
-          echo $! > server.pid
+    - name: 📦 安装依赖
+      run: npm ci
 
-      - name: 📤 上传构建产物
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist
+    - name: 🏗️ 构建项目
+      run: npm run build
+
+    # 启动 Node.js 服务（后台运行）
+    - name: 🚀 启动 Node.js 服务
+      run: |
+        nohup node ./dist/server.mjs > server.log 2>&1 &
+        echo $! > server.pid
+
+    - name: 📤 上传构建产物
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: dist
+
+    - name: ⚡ 执行构建产物脚本
+      run: node ./dist/server.mjs
 
   # 部署工作
   deploy:
@@ -64,6 +67,6 @@ jobs:
     runs-on: ubuntu-latest
     name: Deploy
     steps:
-      - name: 🚀 Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+    - name: 🚀 Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
