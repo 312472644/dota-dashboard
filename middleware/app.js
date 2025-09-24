@@ -1,6 +1,6 @@
-const Koa = require('koa');
-const KoaRouter = require('koa-router');
-const { proxy } = require('./proxy');
+import Koa from 'koa';
+import KoaRouter from 'koa-router';
+import { proxy } from './proxy.js';
 
 const app = new Koa();
 const router = new KoaRouter();

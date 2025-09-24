@@ -1,23 +1,21 @@
-'use strict';
-
-var require$$1$2 = require('tty');
-var require$$1$3 = require('util');
-var require$$0$4 = require('os');
-var require$$1$4 = require('path');
-var require$$0$5 = require('buffer');
-var require$$0$6 = require('events');
-var require$$1$5 = require('fs');
-var require$$1$6 = require('stream');
-var require$$3$2 = require('zlib');
-var require$$0$7 = require('assert');
-var require$$0$8 = require('crypto');
-var require$$2$1 = require('http');
-var require$$0$9 = require('url');
-var require$$0$a = require('net');
-var require$$1$7 = require('querystring');
-var require$$0$b = require('punycode');
-var require$$4$2 = require('https');
-var require$$3$3 = require('tls');
+import require$$1$2 from 'tty';
+import require$$1$3 from 'util';
+import require$$0$4 from 'os';
+import require$$1$4 from 'path';
+import require$$0$5 from 'buffer';
+import require$$0$6 from 'events';
+import require$$1$5 from 'fs';
+import require$$1$6 from 'stream';
+import require$$3$2 from 'zlib';
+import require$$0$7 from 'assert';
+import require$$0$8 from 'crypto';
+import require$$2$1 from 'http';
+import require$$0$9 from 'url';
+import require$$0$a from 'net';
+import require$$1$7 from 'querystring';
+import require$$0$b from 'punycode';
+import require$$4$2 from 'https';
+import require$$3$3 from 'tls';
 
 function getDefaultExportFromCjs (x) {
 	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
@@ -51,8 +49,6 @@ function getAugmentedNamespace(n) {
 	});
 	return a;
 }
-
-var app$1 = {};
 
 var application = {exports: {}};
 
@@ -21053,6 +21049,11 @@ function requireApplication () {
 	return application.exports;
 }
 
+var applicationExports = requireApplication();
+var mod = /*@__PURE__*/getDefaultExportFromCjs(applicationExports);
+
+mod.HttpError;
+
 var httpErrors = {exports: {}};
 
 var require$$0$1 = {
@@ -22323,11 +22324,11 @@ function requireLayer () {
  * @link https://github.com/alexmingoia/koa-router
  */
 
-var router;
+var router$1;
 var hasRequiredRouter;
 
 function requireRouter () {
-	if (hasRequiredRouter) return router;
+	if (hasRequiredRouter) return router$1;
 	hasRequiredRouter = 1;
 	const { debuglog } = require$$1$3;
 
@@ -22343,7 +22344,7 @@ function requireRouter () {
 	 * @module koa-router
 	 */
 
-	router = Router;
+	router$1 = Router;
 
 	/**
 	 * Create a new router.
@@ -23169,8 +23170,11 @@ function requireRouter () {
 	  const args = Array.prototype.slice.call(arguments, 1);
 	  return Layer.prototype.url.apply({ path }, args);
 	};
-	return router;
+	return router$1;
 }
+
+var routerExports = requireRouter();
+var KoaRouter = /*@__PURE__*/getDefaultExportFromCjs(routerExports);
 
 var extend;
 var hasRequiredExtend;
@@ -66180,63 +66184,38 @@ function requireKoa2Request () {
 	return koa2Request;
 }
 
-var proxy_1;
-var hasRequiredProxy;
+var koa2RequestExports = requireKoa2Request();
+var koa2Req = /*@__PURE__*/getDefaultExportFromCjs(koa2RequestExports);
 
-function requireProxy () {
-	if (hasRequiredProxy) return proxy_1;
-	hasRequiredProxy = 1;
-	const koa2Req = requireKoa2Request();
+// 转发请求，请求跨域问题
+const proxy = {
+  init(router) {
+    getRankListAPI(router);
+  }
+};
 
-	// 转发请求，请求跨域问题
-	const proxy = {
-	  init(router) {
-	    getRankListAPI(router);
-	  }
-	};
+// 获取天梯排名
+const getRankListAPI = router => {
+  router.get('/getRankList', async (ctx, next) => {
+    const { url } = ctx.request;
+    const params = url.split('?')?.[1];
+    const response = await koa2Req(`https://api.maxjia.com/api/player/ladder/?${params}`);
+    ctx.body = response.body;
+    next();
+  });
+};
 
-	// 获取天梯排名
-	const getRankListAPI = router => {
-	  router.get('/getRankList', async (ctx, next) => {
-	    const { url } = ctx.request;
-	    const params = url.split('?')?.[1];
-	    const response = await koa2Req(`https://api.maxjia.com/api/player/ladder/?${params}`);
-	    ctx.body = response.body;
-	    next();
-	  });
-	};
+const app = new mod();
+const router = new KoaRouter();
 
-	proxy_1 = { proxy };
-	return proxy_1;
-}
+app.use(async (ctx, next) => {
+  ctx.set('Access-Control-Allow-Origin', '*');
+  await next();
+});
 
-var hasRequiredApp;
+app.use(router.routes());
+proxy.init(router);
 
-function requireApp () {
-	if (hasRequiredApp) return app$1;
-	hasRequiredApp = 1;
-	const Koa = requireApplication();
-	const KoaRouter = requireRouter();
-	const { proxy } = requireProxy();
-
-	const app = new Koa();
-	const router = new KoaRouter();
-
-	app.use(async (ctx, next) => {
-	  ctx.set('Access-Control-Allow-Origin', '*');
-	  await next();
-	});
-
-	app.use(router.routes());
-	proxy.init(router);
-
-	app.listen('3000', () => {
-	  console.log('🚀服务启动成功~，端口号3000');
-	});
-	return app$1;
-}
-
-var appExports = requireApp();
-var app = /*@__PURE__*/getDefaultExportFromCjs(appExports);
-
-module.exports = app;
+app.listen('3000', () => {
+  console.log('🚀服务启动成功~，端口号3000');
+});

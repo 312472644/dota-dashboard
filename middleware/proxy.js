@@ -1,4 +1,4 @@
-const koa2Req = require('koa2-request');
+import koa2Req from 'koa2-request';
 
 // 转发请求，请求跨域问题
 const proxy = {
@@ -18,4 +18,4 @@ const getRankListAPI = router => {
   });
 };
 
-module.exports = { proxy };
+export { proxy };

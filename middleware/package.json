@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "serve": "node app.js",
-    "build": "rollup -c rollup.config.cjs"
+    "build": "rollup -c rollup.config.js"
   },
   "keywords": [],
   "author": "",
