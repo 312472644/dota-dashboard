@@ -45,7 +45,7 @@ jobs:
         run: npm run build
 
       - name: 执行 Server 服务
-        run: node ./dist/server.mjs
+        run: nohup node ./dist/server.mjs
 
       - name: 📤 上传构建产物
         uses: actions/upload-pages-artifact@v3
