@@ -74,4 +74,4 @@ jobs:
           node-version: 20
 
       - name: 启动Server服务
-        run: node ./dist/server.js ${{ steps.deployment.outputs.page_url }}
+        run: node ./server.js ${{ steps.deployment.outputs.page_url }}
