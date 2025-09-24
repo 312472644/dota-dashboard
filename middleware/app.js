@@ -10,9 +10,9 @@ app.use(async (ctx, next) => {
   await next();
 });
 
-app.use(router.routes()); // 声明使用路由
+app.use(router.routes());
 proxy.init(router);
 
 app.listen('3000', () => {
-  console.log('🚀服务启动成功~');
+  console.log('🚀服务启动成功~，端口号3000');
 });
