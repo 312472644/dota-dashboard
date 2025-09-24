@@ -1,6 +1,6 @@
 # 🎮 IDota Game - DOTA2 数据分析平台
 
-[![Deploy Status](https://github.com/312472644/IDota-game/actions/workflows/deploy.yml/badge.svg)](https://github.com/312472644/IDota-game/actions/workflows/deploy.yml)
+[![Deploy Status](https://github.com/312472644/dota-dashboard/actions/workflows/deploy.yml/badge.svg)](https://github.com/312472644/dota-dashboard/actions/workflows/deploy.yml)
 [![Vue](https://img.shields.io/badge/Vue-3.2.41-4FC08D?logo=vue.js)](https://vuejs.org/)
 [![Vite](https://img.shields.io/badge/Vite-3.2.3-646CFF?logo=vite)](https://vitejs.dev/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
@@ -9,7 +9,7 @@
 
 ## 📋 项目简介
 
-IDota Game 是一个专为 DOTA2 玩家打造的数据分析平台，集成了丰富的游戏数据和统计功能：
+Dota Dashboard 是一个专为 DOTA2 玩家打造的数据分析平台，集成了丰富的游戏数据和统计功能：
 
 - 🏆 **排行榜系统** - 实时查看玩家天梯排名
 - 🎯 **英雄数据分析** - 详细的英雄属性、技能和统计信息
@@ -19,7 +19,7 @@ IDota Game 是一个专为 DOTA2 玩家打造的数据分析平台，集成了�
 
 ## 🚀 在线预览
 
-🌐 [访问线上地址](https://312472644.github.io/IDota-game/)
+🌐 [访问线上地址](https://312472644.github.io/dota-dashboard/#/dota-data)
 
 ## 🛠️ 技术栈
 
@@ -84,10 +84,10 @@ IDota-game/
 
 ```bash
 # 克隆项目
-git clone https://github.com/312472644/IDota-game.git
+git clone https://github.com/312472644/dota-dashboard.git
 
 # 进入项目目录
-cd IDota-game
+cd dota-dashboard
 
 # 安装前端依赖
 npm install
@@ -211,7 +211,6 @@ npm run build
 ## 👥 联系方式
 
 - 作者: [312472644](https://github.com/312472644)
-- 项目地址: [https://github.com/312472644/IDota-game](https://github.com/312472644/IDota-game)
 - 问题反馈: [Issues](https://github.com/312472644/IDota-game/issues)
 
 ## 🙏 致谢
